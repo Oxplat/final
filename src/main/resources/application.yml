@@ -1,0 +1,19 @@
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/finalwork
+    username: root
+    password: 123456
+    driver-class-name: org.mariadb.jdbc.Driver
+  mvc:
+    static-path-pattern: /static/**
+mybatis:
+  mapper-locations: classpath:demo/*.m
+  type-aliases-package: com.example.demo
+logging:
+  level:
+    com.example.demo: debug

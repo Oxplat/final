@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.studentinfo.dao.StudentDao">
+
+    <select id="getAllPageData" resultType="com.example.demo.studentinfo.bean.Student">
+        SELECT
+            t_student.pid,
+            t_student.sno,
+            t_student.sname,
+            t_student.ssex,
+            t_student.instructorid,
+            t_student.imgurl,
+            t_user.realname as instructorname,
+            t_student.sphone
+        FROM
+            t_student left join t_user on t_student.instructorid = t_user.pid
+    </select>
+
+    <select id="getPartPageData" resultType="com.example.demo.studentinfo.bean.Student" parameterType="com.example.demo.studentinfo.bean.Student">
+        SELECT
+            t_student.pid,
+            t_student.sno,
+            t_student.sname,
+            t_student.ssex,
+            t_student.instructorid,
+            t_student.imgurl,
+            t_user.realname as instructorname,
+            t_student.sphone
+        FROM
+            t_student left join t_user on t_student.instructorid = t_user.pid
+        WHERE
+            t_student.instructorid = #{pid}
+    </select>
+
+    <select id="getDataByNo" resultType="com.example.demo.studentinfo.bean.Student" parameterType="com.example.demo.studentinfo.bean.Student">
+        SELECT
+            t_student.pid,
+            t_student.sno,
+            t_student.sname,
+            t_student.ssex,
+            t_student.instructorid,
+            t_student.imgurl,
+            t_user.realname,
+            t_user.realname as instructorname,
+            t_student.sphone
+        FROM
+            t_student left join t_user on t_student.instructorid = t_user.pid
+        WHERE
+            t_student.sno = #{sno}
+
+    </select>
+
+    <select id="getPartDataByNo" resultType="com.example.demo.studentinfo.bean.Student" parameterType="com.example.demo.studentinfo.bean.Student">
+        SELECT
+            t_student.pid,
+            t_student.sno,
+            t_student.sname,
+            t_student.ssex,
+            t_student.instructorid,
+            t_student.imgurl,
+            t_user.realname as instructorname,
+            t_student.sphone
+        FROM
+            t_student left join t_user on t_student.instructorid = t_user.pid
+        WHERE
+            t_student.sno = #{sno}
+        AND
+            t_student.instructorid = #{instructorid}
+    </select>
+
+    <insert id="saveStudent" parameterType="com.example.demo.studentinfo.bean.Student">
+        INSERT INTO t_student(sno,sname,ssex,instructorid,imgurl,sphone)
+        VALUES(#{sno},#{sname},#{ssex},#{instructorid},#{imgurl},#{sphone})
+    </insert>
+
+
+</mapper>

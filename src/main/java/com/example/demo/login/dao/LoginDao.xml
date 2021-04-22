@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.login.dao.LoginDao">
+
+    <select id="checkUserPassword" resultType="Integer" parameterType="com.example.demo.login.bean.User">
+        SELECT
+            t_user.pid
+        FROM
+            t_user
+        WHERE
+            t_user.username = #{username}
+        AND t_user.password = #{password}
+    </select>
+
+    <select id="checkUserRole" resultType="com.example.demo.login.bean.User" parameterType="com.example.demo.login.bean.User">
+        SELECT
+            *
+        FROM
+            t_user
+        WHERE
+            t_user.pid = #{pid}
+        AND t_user.role = #{role}
+    </select>
+
+
+</mapper>

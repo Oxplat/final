@@ -1,5 +1,6 @@
 package com.example.demo.studentinfo.controller;
 
+import com.example.demo.dormitoryinfo.bean.Dormitory;
 import com.example.demo.login.bean.User;
 import com.example.demo.studentinfo.bean.Student;
 import com.example.demo.studentinfo.service.StudentService;
@@ -45,21 +46,25 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/studentRegister")
-    public String studentRegister(){
+    public String studentRegister(Model model){
+        List<Dormitory> dormitoryList = studentService.getDormitoryList();
+        List<User> instructorList = studentService.getinstructorList();
+        model.addAttribute("dormitoryList",dormitoryList);
+        model.addAttribute("instructorList",instructorList);
         return "studentRegister";
     }
 
     @ResponseBody
     @RequestMapping(value = "/getImage")
-    public Map getImage(Model model, @RequestParam(required = false)MultipartFile file) throws IOException {
+    public Map getImage(@RequestParam(required = false)MultipartFile file) throws IOException {
         if (file!=null){
             String imgPath = studentService.saveImage(file);
             Map<String,Object> map = new HashMap<>();
             Map<String,Object> map1 = new HashMap<>();
             map.put("code",0);
             map.put("msg","");
-            map.put("data",map1);
             map1.put("src",imgPath);
+            map.put("data",map1);
             return map;
         }else {
             Map<String,Object> map = new HashMap<>();

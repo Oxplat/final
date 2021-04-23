@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>配置宿舍</title>
+    <link rel="icon" href="../static/images/favicon.ico" sizes="32x32" />
+    <link rel="stylesheet" href="../static/css/font.css">
+    <link rel="stylesheet" href="../static/css/xadmin.css">
+    <link rel="stylesheet" href="../static/css/pg_btn.css">
+    <script type="text/javascript" src="../static/js/jquery-1.3.2.min.js"></script>
+    <script src="../static/lib/layui/layui.js"></script>
+    <script type="text/javascript" src="../static/js/xadmin.js"></script>
+</head>
+<body>
+<div class="x-body">
+    <form class="layui-form" action="/saveDormitory" method="post"  id="f_auto" accept-charset="UTF-8">
+        <input type="hidden" name="pid" th:value="${user.pid}">
+        <input type="hidden" name="role" th:value="${user.role}">
+        <div class="layui-form-item">
+            <label for="buildno" class="layui-form-label">
+                <span class="must">*</span><span class="f_sp">楼号</span>
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="buildno" name="buildno" lay-verify="required" lay-reqtext="楼号不能为空" placeholder="请输入" autocomplete="off"  class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="layerno" class="layui-form-label">
+                <span class="must">*</span><span class="f_sp">层数</span>
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="layerno" name="layerno" lay-verify="required|number" lay-reqtext="层数不能为空" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="roomno" class="layui-form-label">
+                <span class="must">*</span><span class="f_sp">房间数</span>
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="roomno" name="roomno" lay-verify="required|number" lay-reqtext="房间数不能为空" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="bedno" class="layui-form-label">
+                <span class="must">*</span><span class="f_sp">床位数</span>
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="bedno" name="bedno" lay-verify="required|number" lay-reqtext="床位数不能为空" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item" id="btn_xg">
+            <button  class="layui-btn"  id="btn_on" lay-filter="updateForm" lay-submit="">
+                保存
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

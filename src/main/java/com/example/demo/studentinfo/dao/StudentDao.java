@@ -1,5 +1,6 @@
 package com.example.demo.studentinfo.dao;
 
+import com.example.demo.dormitoryinfo.bean.Dormitory;
 import com.example.demo.login.bean.User;
 import com.example.demo.studentinfo.bean.Student;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,4 +23,7 @@ public interface StudentDao {
     List<Student> getDataByNo(Student student);
     List<Student> getPartDataByNo(Student student);
     Boolean saveStudent(Student student);
+    List<Dormitory> getDomitoryList();
+    void updDormitoryStatus(Integer dormitoryid);
+    List<User> getInstructorList();
 }

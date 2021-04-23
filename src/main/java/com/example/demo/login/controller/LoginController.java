@@ -2,11 +2,19 @@ package com.example.demo.login.controller;
 
 import com.example.demo.login.bean.User;
 import com.example.demo.login.service.LoginService;
+import com.example.demo.studentinfo.bean.Student;
+import com.lzw.face.FaceHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 @Controller
 public class LoginController {
 
@@ -14,7 +22,7 @@ public class LoginController {
     LoginService loginService;
 
     @RequestMapping(value = "/login")
-    public String Login(Model model, User user) {
+    public String Login(Model model, User user) throws IOException {
 
         if (user.getUsername()==null||"".equals(user.getUsername())){
             model.addAttribute("msg","用户名不能为空");
@@ -28,6 +36,16 @@ public class LoginController {
             user.setPid(pid);
             User roleChkUser = loginService.CheckUserRole(user);
             if (roleChkUser!=null){
+                List<Student> studentList = loginService.getAllStudent(); //获取全部学生列表进行人脸注册
+                for (Student bean: studentList){
+                    if (bean.getImgurl()!=null&&!"".equals(bean.getImgurl())){
+                        File file = new File(bean.getImgurl());
+                        BufferedImage img = ImageIO.read(file);
+                        int index = FaceHelper.register(img);
+                        bean.setIndex(index);
+                        loginService.updStuInx(bean);
+                    }
+                }
                 model.addAttribute("user",roleChkUser);
                 return "homepage";
             }else {

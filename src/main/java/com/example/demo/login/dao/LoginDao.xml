@@ -22,5 +22,25 @@
         AND t_user.role = #{role}
     </select>
 
+    <select id="getAllStudent" resultType="com.example.demo.studentinfo.bean.Student">
+        SELECT
+            t_student.pid,
+            t_student.sno,
+            t_student.sname,
+            t_student.ssex,
+            t_student.instructorid,
+            t_student.imgurl,
+            t_student.sphone,
+            t_student.index
+        FROM
+            t_student
+    </select>
+
+    <update id="updStuInx" parameterType="com.example.demo.studentinfo.bean.Student">
+        update t_student
+        set t_student.index = #{index}
+        where t_student.pid = #{pid}
+    </update>
+
 
 </mapper>

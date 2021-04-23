@@ -11,12 +11,13 @@
             t_student.instructorid,
             t_student.imgurl,
             t_user.realname as instructorname,
-            t_student.sphone
+            t_student.sphone,
+            t_student.index
         FROM
             t_student left join t_user on t_student.instructorid = t_user.pid
     </select>
 
-    <select id="getPartPageData" resultType="com.example.demo.studentinfo.bean.Student" parameterType="com.example.demo.studentinfo.bean.Student">
+    <select id="getPartPageData" resultType="com.example.demo.studentinfo.bean.Student" parameterType="com.example.demo.login.bean.User">
         SELECT
             t_student.pid,
             t_student.sno,
@@ -25,7 +26,8 @@
             t_student.instructorid,
             t_student.imgurl,
             t_user.realname as instructorname,
-            t_student.sphone
+            t_student.sphone,
+            t_student.index
         FROM
             t_student left join t_user on t_student.instructorid = t_user.pid
         WHERE
@@ -42,7 +44,8 @@
             t_student.imgurl,
             t_user.realname,
             t_user.realname as instructorname,
-            t_student.sphone
+            t_student.sphone,
+            t_student.index
         FROM
             t_student left join t_user on t_student.instructorid = t_user.pid
         WHERE
@@ -59,7 +62,8 @@
             t_student.instructorid,
             t_student.imgurl,
             t_user.realname as instructorname,
-            t_student.sphone
+            t_student.sphone,
+            t_student.index
         FROM
             t_student left join t_user on t_student.instructorid = t_user.pid
         WHERE
@@ -69,9 +73,41 @@
     </select>
 
     <insert id="saveStudent" parameterType="com.example.demo.studentinfo.bean.Student">
-        INSERT INTO t_student(sno,sname,ssex,instructorid,imgurl,sphone)
-        VALUES(#{sno},#{sname},#{ssex},#{instructorid},#{imgurl},#{sphone})
+        INSERT INTO t_student(sno,sname,ssex,instructorid,imgurl,dormitoryid,sphone,index)
+        VALUES(#{sno},#{sname},#{ssex},#{instructorid},#{imgurl},#{dormitoryid},#{sphone},#{index})
     </insert>
+
+    <select id="getDomitoryList" resultType="com.example.demo.dormitoryinfo.bean.Dormitory">
+        SELECT
+            t_dormitory.pid,
+            t_dormitory.dormitorycode,
+            t_dormitory.buildno,
+            t_dormitory.layerno,
+            t_dormitory.roomno,
+            t_dormitory.bedno,
+            t_dormitory.bedstatus
+        FROM
+            t_dormitory
+        WHERE
+            t_dormitory.bedstatus != '已入住'
+    </select>
+
+    <select id="getInstructorList" resultType="com.example.demo.login.bean.User">
+        SELECT
+            t_user.pid,
+            t_user.realname,
+            t_user.role
+        FROM
+            t_user
+        WHERE
+            t_user.role = '辅导员'
+    </select>
+
+    <update id="updDormitoryStatus" parameterType="Integer">
+        update t_dormitory
+        set bedstatus = '已入住'
+        where t_dormitory.pid = #{dormitoryid}
+    </update>
 
 
 </mapper>

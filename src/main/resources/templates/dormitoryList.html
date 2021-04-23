@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-<!--    <meta http-equiv="Cache-Control" content="no-siteapp" />-->
+    <!--    <meta http-equiv="Cache-Control" content="no-siteapp" />-->
 
     <link rel="icon" href="../static/images/favicon.ico" sizes="32x32" />
     <link rel="stylesheet" href="../static/css/font.css">
@@ -28,42 +28,57 @@
 <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a th:attr="href='/studentList?role='+${user.role}+'&pid='+${user.pid}">入住学生信息</a>
+        <a th:attr="href='/DormitoryList?role='+${user.role}+'&pid='+${user.pid}">宿舍信息</a>
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" th:attr="href='/studentList?role='+${user.role}+'&pid='+${user.pid}" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" th:attr="href='/DormitoryList?role='+${user.role}+'&pid='+${user.pid}" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
     <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="/searchStudentList" >
             <input class="layui-input" placeholder="请输入学号" name="sno" id="sno">
-            <input class="layui-input" type="hidden" style="display: none" name="role" th:value="${user.role}">
-            <input class="layui-input" type="hidden" style="display: none" name="instructorid" th:value="${user.pid}">
+            <input class="layui-input" type="hidden" name="role" th:value="${user.role}">
+            <input class="layui-input" type="hidden" name="instructorid" th:value="${user.pid}">
             <button class="layui-btn"  lay-submit="" lay-filter="search"><i class="layui-icon">&#xe615;</i></button>
         </form>
+        <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal layui-col-md-offset11"><a th:attr="href='/dormitoryConfig?role='+${user.role}+'&pid='+${user.pid}">配置宿舍</a></button>
     </div>
 
-<!--    表格数据-->
+    <!--表格数据-->
     <table class="layui-table">
         <thead>
         <tr>
-            <th>学号</th>
-            <th>学生姓名</th>
-            <th>学生性别</th>
-            <th>电话</th>
-            <th>辅导员</th>
+            <th>宿舍编码</th>
+            <th>楼号</th>
+            <th>层号</th>
+            <th>房间号</th>
+            <th>床位号</th>
+            <th>床位状态</th>
         </thead>
         <tbody>
-            <tr th:each="student : ${beans}">
-                <td th:text="${student.sno}"></td>
-                <td th:text="${student.sname}"></td>
-                <td th:text="${student.ssex}"></td>
-                <td th:text="${student.sphone}"></td>
-                <td th:text="${student.instructorname}"></td>
-            </tr>
+        <tr th:each="dormitory : ${beans}">
+            <td th:text="${dormitory.dormitorycode}"></td>
+            <td th:text="${dormitory.buildno}"></td>
+            <td th:text="${dormitory.layerno}"></td>
+            <td th:text="${dormitory.roomno}"></td>
+            <td th:text="${dormitory.bedno}"></td>
+            <td th:text="${dormitory.bedstatus}"></td>
+        </tr>
         </tbody>
     </table>
 </div>
+
+<script>
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+            ,count: 50 //数据总数，从服务端得到
+        });
+    });
+</script>
 
 </body>
 </html>

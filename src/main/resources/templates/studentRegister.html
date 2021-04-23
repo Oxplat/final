@@ -14,7 +14,6 @@
 <body>
 <div class="x-body">
     <form class="layui-form" action="/saveStudent" method="post"  id="f_auto" accept-charset="UTF-8">
-        <input type="hidden" id="s_id"/>
         <div class="layui-form-item">
             <label for="sno" class="layui-form-label">
                 <span class="must">*</span><span class="f_sp">学号</span>
@@ -45,7 +44,7 @@
 
         <div class="layui-form-item">
             <label for="imgurl" class="layui-form-label">
-                实名照片
+                <span class="f_sp">实名照片</span>
             </label>
             <div class="layui-input-inline" id="imgurl">
                 <div class="layui-upload">
@@ -65,17 +64,33 @@
                 <span class="f_sp">电话</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="sphone" name="s_phone"
-                       autocomplete="off" class="layui-input">
+                <input type="text" id="sphone" name="sphone" lay-verify="phone" autocomplete="off" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label for="dormitoryid" class="layui-form-label">
-                <span class="must">*</span>寝室编号
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="dormitoryid" name="dormitoryid" lay-verify="required" lay-reqtext="寝室不能为空" placeholder="请输入" autocomplete="off" class="layui-input">
+            <div class="layui-inline">
+                <label class="layui-form-label">
+                    <span class="f_sp">寝室编号</span>
+                </label>
+                <div class="layui-input-inline">
+                    <select name="dormitoryid"  lay-verify="required" lay-search="">
+                        <option th:each="dormitory: ${dormitoryList}" th:value="${dormitory.pid}" th:text="${dormitory.dormitorycode}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">
+                    <span class="f_sp">辅导员</span>
+                </label>
+                <div class="layui-input-inline">
+                    <select name="instructorid"  lay-verify="required" lay-search="">
+                        <option th:each="instructor: ${instructorList}" th:value="${instructor.pid}" th:text="${instructor.realname}"></option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -121,9 +136,6 @@
                 });
             }
         });
-
-
-
 
     });
 </script>

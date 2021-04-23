@@ -53,18 +53,26 @@
 <div class="left-nav">
     <div id="side-nav">
         <ul id="nav">
+
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b8;</i>
-                    <cite>学生信息管理</cite>
+                    <cite>宿舍信息管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
+                        <a _href="/DormitoryList" th:attr="_href='/DormitoryList?role='+${user.role}+'&pid='+${user.pid}">
+                            <!--点击在右侧出现动态的Tab-->
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>宿舍信息</cite>
+                        </a>
+                    </li >
+                    <li>
                         <a _href="/studentList" th:attr="_href='/studentList?role='+${user.role}+'&pid='+${user.pid}">
                             <!--点击在右侧出现动态的Tab-->
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>学生信息</cite>
+                            <cite>入住学生信息</cite>
                         </a>
                     </li >
                     <li>
@@ -77,44 +85,19 @@
                 </ul>
             </li>
 
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe723;</i>
-                    <cite>班级管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="/findClass">
-<!--                            点击在右侧出现动态的Tab-->
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>班级列表</cite>
-                        </a>
-                    </li >
-
-                    <li>
-                        <a _href="/findClassStudent">
-<!--                            点击在右侧出现动态的Tab-->
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>班级学生</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
-
 
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#59095;</i>
-                    <cite>宿舍管理</cite>
+                    <cite>门禁系统</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="/findDormitory">
-<!--                            点击在右侧出现动态的Tab-->
+                        <a _href="/doorcontrol">
+                            <!--点击在右侧出现动态的Tab-->
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>宿舍列表</cite>
+                            <cite>模拟扫脸门禁功能</cite>
                         </a>
                     </li >
                 </ul>
@@ -266,8 +249,7 @@
     });
 
     function ajaxtoBack() {
-        console.log($("#role")[0]);
-        console.log($("#pid")[0]);
+
         var user=[{
             role:$("#role")[0].innerText,
             pid:$("#pid")[0].innerText

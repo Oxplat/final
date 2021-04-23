@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟门禁扫脸功能</title>
+    <link rel="icon" href="../static/images/favicon.ico" sizes="32x32" />
+    <link rel="stylesheet" href="../static/css/font.css">
+    <link rel="stylesheet" href="../static/css/xadmin.css">
+    <link rel="stylesheet" href="../static/css/pg_btn.css">
+    <script type="text/javascript" src="../static/js/jquery-1.3.2.min.js"></script>
+    <script src="../static/lib/layui/layui.js"></script>
+    <script type="text/javascript" src="../static/js/xadmin.js"></script>
+</head>
+<body>
+
+<div class="x-body">
+    <form class="layui-form" action="/searchFace" method="post"  id="f_auto" accept-charset="UTF-8">
+
+        <div class="layui-form-item">
+            <label for="imgurl" class="layui-form-label">
+                <span class="f_sp">实名照片</span>
+            </label>
+            <div class="layui-input-inline" id="imgurl">
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="test1">识别人脸</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="demo1">
+                        <p id="demoText"></p>
+                    </div>
+                </div>
+                <input type="hidden" id="img" name="imgurl">
+            </div>
+        </div>
+        <div class="layui-form-item" id="btn_xg">
+<!--            <button  class="layui-btn"  id="btn_on" lay-filter="updateForm" lay-submit="">-->
+<!--                显示结果-->
+<!--            </button>-->
+            <span id="stuno"></span>
+            <span id="stuname"></span>
+            <span id="stuphone"></span>
+            <span id="pass"></span>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    layui.use('upload', function(){
+        var $ = layui.jquery
+            ,upload = layui.upload;
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: '/getCurFace' //改成您自己的上传接口
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                $("#stuno").html(res.msg.sno);
+                $("#stuname").html(res.msg.sname);
+                $("#stuphone").html(res.msg.sphone);
+                $("#pass").html("已开门");
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

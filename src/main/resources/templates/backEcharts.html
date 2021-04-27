@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../static/js/echarts.min.js"></script>
+    <script type="text/javascript" src="../static/js/jquery-1.3.2.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 100%;height: 600px"></div>
+
+<script>
+
+    var chartDom = document.getElementById('main');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        legend: {
+            data: ['正常归寝', '晚归', '未归']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: []
+    };
+
+    $.ajax({
+        url:"/getEcharts",
+        async:false,
+        cache:false,
+        success:function (data) {
+            var data = JSON.parse((data));
+            console.log(data)
+            option.series = [
+                {
+                    name: '正常归寝',
+                    type: 'bar',
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: data.normalBack
+                },
+                {
+                    name: '晚归',
+                    type: 'bar',
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: data.lateBack
+                },
+                {
+                    name: '未归',
+                    type: 'bar',
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: data.noBack
+                }
+            ]
+            myChart.setOption(option);
+        }
+    });
+
+</script>
+</body>
+</html>

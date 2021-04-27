@@ -14,7 +14,7 @@
 <body>
 
 <div class="x-body">
-    <form class="layui-form" action="/searchFace" method="post"  id="f_auto" accept-charset="UTF-8">
+    <form class="layui-form" action="#" method="post"  id="f_auto" accept-charset="UTF-8">
 
         <div class="layui-form-item">
             <label for="imgurl" class="layui-form-label">
@@ -31,15 +31,14 @@
                 <input type="hidden" id="img" name="imgurl">
             </div>
         </div>
+
         <div class="layui-form-item" id="btn_xg">
-<!--            <button  class="layui-btn"  id="btn_on" lay-filter="updateForm" lay-submit="">-->
-<!--                显示结果-->
-<!--            </button>-->
-            <span id="stuno"></span>
-            <span id="stuname"></span>
-            <span id="stuphone"></span>
+            <span id="stuno"></span><br>
+            <span id="stuname"></span><br>
+            <span id="stuphone"></span><br>
             <span id="pass"></span>
         </div>
+
     </form>
 </div>
 
@@ -68,7 +67,7 @@
                 $("#stuno").html(res.msg.sno);
                 $("#stuname").html(res.msg.sname);
                 $("#stuphone").html(res.msg.sphone);
-                $("#pass").html("已开门");
+                $("#pass").html(res.msg.stustatus);
             }
             ,error: function(){
                 //演示失败状态，并实现重传

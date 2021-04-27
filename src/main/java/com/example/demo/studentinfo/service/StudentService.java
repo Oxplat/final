@@ -57,7 +57,7 @@ public class StudentService {
         File file = new File(student.getImgurl());
         BufferedImage img = ImageIO.read(file);
         int index = FaceHelper.register(img);
-        student.setIndex(index);
+        student.setFaceindex(index);
         studentDao.updDormitoryStatus(dormitoryid);
         boolean res = studentDao.saveStudent(student);
         return res;

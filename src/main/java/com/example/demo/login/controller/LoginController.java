@@ -42,7 +42,7 @@ public class LoginController {
                         File file = new File(bean.getImgurl());
                         BufferedImage img = ImageIO.read(file);
                         int index = FaceHelper.register(img);
-                        bean.setIndex(index);
+                        bean.setFaceindex(index);
                         loginService.updStuInx(bean);
                     }
                 }

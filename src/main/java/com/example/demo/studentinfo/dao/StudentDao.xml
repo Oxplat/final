@@ -12,7 +12,8 @@
             t_student.imgurl,
             t_user.realname as instructorname,
             t_student.sphone,
-            t_student.index
+            t_student.stustatus,
+            t_student.faceindex
         FROM
             t_student left join t_user on t_student.instructorid = t_user.pid
     </select>
@@ -27,7 +28,8 @@
             t_student.imgurl,
             t_user.realname as instructorname,
             t_student.sphone,
-            t_student.index
+            t_student.stustatus,
+            t_student.faceindex
         FROM
             t_student left join t_user on t_student.instructorid = t_user.pid
         WHERE
@@ -45,7 +47,8 @@
             t_user.realname,
             t_user.realname as instructorname,
             t_student.sphone,
-            t_student.index
+            t_student.stustatus,
+            t_student.faceindex
         FROM
             t_student left join t_user on t_student.instructorid = t_user.pid
         WHERE
@@ -63,7 +66,8 @@
             t_student.imgurl,
             t_user.realname as instructorname,
             t_student.sphone,
-            t_student.index
+            t_student.stustatus,
+            t_student.faceindex
         FROM
             t_student left join t_user on t_student.instructorid = t_user.pid
         WHERE
@@ -73,8 +77,8 @@
     </select>
 
     <insert id="saveStudent" parameterType="com.example.demo.studentinfo.bean.Student">
-        INSERT INTO t_student(sno,sname,ssex,instructorid,imgurl,dormitoryid,sphone,index)
-        VALUES(#{sno},#{sname},#{ssex},#{instructorid},#{imgurl},#{dormitoryid},#{sphone},#{index})
+        INSERT INTO t_student(sno,sname,ssex,instructorid,imgurl,dormitoryid,sphone,faceindex)
+        VALUES(#{sno},#{sname},#{ssex},#{instructorid},#{imgurl},#{dormitoryid},#{sphone},#{faceindex})
     </insert>
 
     <select id="getDomitoryList" resultType="com.example.demo.dormitoryinfo.bean.Dormitory">

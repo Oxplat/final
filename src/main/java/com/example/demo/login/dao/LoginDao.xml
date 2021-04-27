@@ -31,14 +31,14 @@
             t_student.instructorid,
             t_student.imgurl,
             t_student.sphone,
-            t_student.index
+            t_student.faceindex
         FROM
             t_student
     </select>
 
     <update id="updStuInx" parameterType="com.example.demo.studentinfo.bean.Student">
         update t_student
-        set t_student.index = #{index}
+        set t_student.faceindex = #{faceindex}
         where t_student.pid = #{pid}
     </update>
 

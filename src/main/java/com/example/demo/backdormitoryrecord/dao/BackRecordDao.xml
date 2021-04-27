@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.backdormitoryrecord.dao.BackRecordDao">
+
+    <select id="getInforEcharts" resultType="com.example.demo.backdormitoryrecord.bean.LateBackRecoEntity">
+        select *
+        from t_backrecord
+    </select>
+
+    <select id="getNormalBack" resultType="com.example.demo.backdormitoryrecord.bean.EchartsEntity">
+        SELECT DISTINCT
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=1 AND t_backrecord.islate = '正常'),0) AS day1,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=2 AND t_backrecord.islate = '正常'),0) AS day2,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=3 AND t_backrecord.islate = '正常'),0) AS day3,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=4 AND t_backrecord.islate = '正常'),0) AS day4,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=5 AND t_backrecord.islate = '正常'),0) AS day5,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=6 AND t_backrecord.islate = '正常'),0) AS day6,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=7 AND t_backrecord.islate = '正常'),0) AS day7
+        FROM t_backrecord
+    </select>
+
+    <select id="getLateBack" resultType="com.example.demo.backdormitoryrecord.bean.EchartsEntity">
+        SELECT DISTINCT
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=1 AND t_backrecord.islate = '晚归'),0) AS day1,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=2 AND t_backrecord.islate = '晚归'),0) AS day2,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=3 AND t_backrecord.islate = '晚归'),0) AS day3,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=4 AND t_backrecord.islate = '晚归'),0) AS day4,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=5 AND t_backrecord.islate = '晚归'),0) AS day5,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=6 AND t_backrecord.islate = '晚归'),0) AS day6,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=7 AND t_backrecord.islate = '晚归'),0) AS day7
+        FROM t_backrecord
+    </select>
+
+    <select id="getNolBack" resultType="com.example.demo.backdormitoryrecord.bean.EchartsEntity">
+        SELECT DISTINCT
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=1 AND t_backrecord.islate = '未归'),0) AS day1,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=2 AND t_backrecord.islate = '未归'),0) AS day2,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=3 AND t_backrecord.islate = '未归'),0) AS day3,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=4 AND t_backrecord.islate = '未归'),0) AS day4,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=5 AND t_backrecord.islate = '未归'),0) AS day5,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=6 AND t_backrecord.islate = '未归'),0) AS day6,
+        IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=7 AND t_backrecord.islate = '未归'),0) AS day7
+        FROM t_backrecord
+    </select>
+
+
+</mapper>

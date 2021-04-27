@@ -20,5 +20,6 @@ public class Student {
     private String instructorname;
     private String sphone;
     private Integer dormitoryid;
-    private Integer index;
+    private Integer faceindex;
+    private String stustatus;
 }

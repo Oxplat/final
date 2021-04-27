@@ -5,8 +5,36 @@
     <select id="getStuByIndex" parameterType="int" resultType="com.example.demo.studentinfo.bean.Student">
         select *
         from t_student
-        where t_student.index = #{index}
+        where t_student.faceindex = #{faceindex}
     </select>
+
+    <insert id="saveRecord" parameterType="com.example.demo.doorcontrol.bean.DoorEntity">
+        INSERT INTO t_backrecord(stuid,instructorid,backdate,weekday,islate)
+        VALUES(#{stuid},#{instructorid},#{backdate},#{weekday},#{islate})
+    </insert>
+
+    <select id="getStuList" resultType="com.example.demo.studentinfo.bean.Student">
+        select *
+        from t_student
+    </select>
+
+    <select id="getStuByPid" resultType="com.example.demo.studentinfo.bean.Student">
+        select *
+        from t_student
+        where t_student.pid = #{pid}
+    </select>
+
+    <update id="stuGoOut" parameterType="Integer">
+        update t_student
+        set t_student.stustatus = '外出'
+        where t_student.pid = #{pid}
+    </update>
+
+    <update id="stuBack" parameterType="com.example.demo.studentinfo.bean.Student">
+        update t_student
+        set t_student.stustatus = #{stustatus}
+        where t_student.pid = #{pid}
+    </update>
 
 
 </mapper>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟门禁扫脸功能</title>
+    <link rel="icon" href="../static/images/favicon.ico" sizes="32x32" />
+    <link rel="stylesheet" href="../static/css/font.css">
+    <link rel="stylesheet" href="../static/css/xadmin.css">
+    <link rel="stylesheet" href="../static/css/pg_btn.css">
+    <script type="text/javascript" src="../static/js/jquery-1.3.2.min.js"></script>
+    <script src="../static/lib/layui/layui.js"></script>
+    <script type="text/javascript" src="../static/js/xadmin.js"></script>
+</head>
+<body>
+
+<div class="x-body">
+    <form class="layui-form" action="/stuGoOut" method="post"  id="f_auto" accept-charset="UTF-8">
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">
+                    <span class="f_sp">选择学生离开宿舍</span>
+                </label>
+                <div class="layui-input-inline">
+                    <select name="pid"  lay-verify="required" lay-search="">
+                        <option  value="0" ></option>
+                        <option th:each="student: ${studentList}" th:value="${student.pid}" th:text="${student.sname}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button  class="layui-btn"  id="btn_on" lay-filter="updateForm" lay-submit="">
+            模拟外出
+        </button>
+
+        <span th:text="${msg}"></span>
+
+    </form>
+</div>
+
+</body>
+</html>

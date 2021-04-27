@@ -28,17 +28,17 @@
 <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a th:attr="href='/studentList?role='+${user.role}+'&pid='+${user.pid}">入住学生信息</a>
+        <a href="/lateBackReco">晚归记录</a>
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" th:attr="href='/studentList?role='+${user.role}+'&pid='+${user.pid}" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="/lateBackReco" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
     <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="/searchStudentList" >
             <input class="layui-input" placeholder="请输入学号" name="sno" id="sno">
-            <input class="layui-input" type="hidden" style="display: none" name="role" th:value="${user.role}">
-            <input class="layui-input" type="hidden" style="display: none" name="instructorid" th:value="${user.pid}">
+<!--            <input class="layui-input" type="hidden" style="display: none" name="role" th:value="${user.role}">-->
+<!--            <input class="layui-input" type="hidden" style="display: none" name="instructorid" th:value="${user.pid}">-->
             <button class="layui-btn"  lay-submit="" lay-filter="search"><i class="layui-icon">&#xe615;</i></button>
         </form>
     </div>
@@ -53,6 +53,7 @@
             <th>电话</th>
             <th>状态</th>
             <th>辅导员</th>
+            <th>辅导员电话</th>
         </thead>
         <tbody>
             <tr th:each="student : ${beans}">

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.admin.dao.AdminDao">
+
+    <select id="getUserList" resultType="com.example.demo.login.bean.User">
+        select *
+        from t_user
+    </select>
+
+    <select id="getUserByUN" parameterType="com.example.demo.login.bean.User" resultType="com.example.demo.login.bean.User">
+        select *
+        from t_user
+        where t_user.username = #{username}
+    </select>
+
+    <insert id="addAdmin" parameterType="com.example.demo.login.bean.User">
+        INSERT INTO t_user(username,password,role,realname,phone)
+        VALUES(#{username},#{password},#{role},#{realname},#{phone})
+    </insert>
+
+    <select id="getUserById" resultType="com.example.demo.login.bean.User" parameterType="Integer">
+        select *
+        from t_user
+        where t_user.pid = #{pid}
+    </select>
+
+    <select id="getAllUser" resultType="com.example.demo.login.bean.User">
+        select *
+        from t_user
+    </select>
+
+    <update id="updAdmin">
+        update t_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="username != null and '' != username">username = #{username},</if>
+            <if test="password != null and '' != password">password = #{password},</if>
+            <if test="role != null and '' != role">role = #{role},</if>
+            <if test="realname != null and '' != realname">realname = #{realname},</if>
+            <if test="phone != null and '' != phone">phone = #{phone},</if>
+        </trim>
+        where t_user.pid = #{pid}
+    </update>
+
+    <delete id="delAdminById" parameterType="Integer">
+        delete
+        from t_user
+        where t_user.pid = #{pid}
+    </delete>
+
+
+
+
+</mapper>

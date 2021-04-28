@@ -19,7 +19,10 @@ public class LateBackRecoEntity {
     private Date backdate;
     private Integer weekday;
     private String islate;
-    private Integer normalnums;
-    private Integer latenums;
-    private Integer nobacknums;
+    private String sno;
+    private String sname;
+    private String ssex;
+    private String sphone;
+    private String realname;
+    private String phone;
 }

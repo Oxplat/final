@@ -41,8 +41,12 @@
             <input class="layui-input" type="hidden" name="instructorid" th:value="${user.pid}">
             <button class="layui-btn"  lay-submit="" lay-filter="search"><i class="layui-icon">&#xe615;</i></button>
         </form>
-        <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal layui-col-md-offset11"><a th:attr="href='/dormitoryConfig?role='+${user.role}+'&pid='+${user.pid}">配置宿舍</a></button>
     </div>
+
+    <xblock>
+        <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal layui-col-md-offset11"><a th:attr="href='/dormitoryConfig?role='+${user.role}+'&pid='+${user.pid}">配置宿舍</a></button>
+    </xblock>
+
 
     <!--表格数据-->
     <table class="layui-table">

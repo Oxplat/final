@@ -24,5 +24,9 @@ public interface BackRecordDao {
 
     EchartsEntity getLateBack();
 
-    EchartsEntity getNolBack();
+    EchartsEntity getNoBack();
+
+    List<LateBackRecoEntity> getLateBackInfo();
+
+    List<LateBackRecoEntity> getNoBackInfo();
 }

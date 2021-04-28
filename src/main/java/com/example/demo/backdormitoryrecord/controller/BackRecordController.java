@@ -3,7 +3,6 @@ package com.example.demo.backdormitoryrecord.controller;
 import com.example.demo.backdormitoryrecord.bean.EchartsEntity;
 import com.example.demo.backdormitoryrecord.bean.LateBackRecoEntity;
 import com.example.demo.backdormitoryrecord.service.BackRecordService;
-import com.example.demo.studentinfo.bean.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +37,7 @@ public class BackRecordController {
         Map<String,Object> map = new HashMap<>();
         EchartsEntity normal = backRecordService.getNormalBack();
         EchartsEntity late = backRecordService.getLateBack();
-        EchartsEntity no = backRecordService.getNolBack();
+        EchartsEntity no = backRecordService.getNoBack();
         int[] normalBack = {normal.getDay1(),normal.getDay2(),normal.getDay3(),normal.getDay4(),normal.getDay5(),normal.getDay6(),normal
         .getDay7()};
         int[] lateBack = {late.getDay1(),late.getDay2(),late.getDay3(),late.getDay4(),late.getDay5(),late.getDay6(),late.getDay7()};
@@ -51,8 +50,16 @@ public class BackRecordController {
 
     @RequestMapping(value = "/lateBackReco")
     public String toLateBackReco(Model model){
-//        List<>  backRecordService.getLateBackInfo();
+        List<LateBackRecoEntity> beans = backRecordService.getLateBackInfo();
+        model.addAttribute("beans",beans);
         return "lateBackReco";
+    }
+
+    @RequestMapping(value = "/noBackReco")
+    public String toNoBackReco(Model model){
+        List<LateBackRecoEntity> beans = backRecordService.getNoBackInfo();
+        model.addAttribute("beans",beans);
+        return "noBackReco";
     }
 
 

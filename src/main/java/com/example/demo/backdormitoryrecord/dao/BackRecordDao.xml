@@ -31,7 +31,7 @@
         FROM t_backrecord
     </select>
 
-    <select id="getNolBack" resultType="com.example.demo.backdormitoryrecord.bean.EchartsEntity">
+    <select id="getNoBack" resultType="com.example.demo.backdormitoryrecord.bean.EchartsEntity">
         SELECT DISTINCT
         IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=1 AND t_backrecord.islate = '未归'),0) AS day1,
         IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=2 AND t_backrecord.islate = '未归'),0) AS day2,
@@ -41,6 +41,50 @@
         IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=6 AND t_backrecord.islate = '未归'),0) AS day6,
         IFNULL((SELECT COUNT(t_backrecord.weekday) FROM t_backrecord WHERE t_backrecord.weekday=7 AND t_backrecord.islate = '未归'),0) AS day7
         FROM t_backrecord
+    </select>
+
+    <select id="getLateBackInfo" resultType="com.example.demo.backdormitoryrecord.bean.LateBackRecoEntity">
+        select
+            t_backrecord.pid,
+            t_backrecord.stuid,
+            t_backrecord.instructorid,
+            t_backrecord.backdate,
+            t_backrecord.weekday,
+            t_backrecord.islate,
+            t_student.sno,
+            t_student.sname,
+            t_student.ssex,
+            t_student.sphone,
+            t_user.realname,
+            t_user.phone
+        from
+            t_backrecord
+        left join t_student on t_backrecord.stuid = t_student.pid
+        left join t_user on t_backrecord.instructorid = t_user.pid
+        where
+            t_backrecord.islate = '晚归'
+    </select>
+
+    <select id="getNoBackInfo" resultType="com.example.demo.backdormitoryrecord.bean.LateBackRecoEntity">
+        select
+            t_backrecord.pid,
+            t_backrecord.stuid,
+            t_backrecord.instructorid,
+            t_backrecord.backdate,
+            t_backrecord.weekday,
+            t_backrecord.islate,
+            t_student.sno,
+            t_student.sname,
+            t_student.ssex,
+            t_student.sphone,
+            t_user.realname,
+            t_user.phone
+        from
+            t_backrecord
+        left join t_student on t_backrecord.stuid = t_student.pid
+        left join t_user on t_backrecord.instructorid = t_user.pid
+        where
+            t_backrecord.islate = '未归'
     </select>
 
 

@@ -21,10 +21,6 @@ public class BackRecordService {
     @Resource
     BackRecordDao backRecordDao;
 
-    public List<LateBackRecoEntity> getInforEcharts() {
-        return backRecordDao.getInforEcharts();
-    }
-
     public EchartsEntity getNormalBack() {
         return backRecordDao.getNormalBack();
     }
@@ -33,7 +29,15 @@ public class BackRecordService {
         return backRecordDao.getLateBack();
     }
 
-    public EchartsEntity getNolBack() {
-        return backRecordDao.getNolBack();
+    public EchartsEntity getNoBack() {
+        return backRecordDao.getNoBack();
+    }
+
+    public List<LateBackRecoEntity> getLateBackInfo() {
+        return backRecordDao.getLateBackInfo();
+    }
+
+    public List<LateBackRecoEntity> getNoBackInfo() {
+        return backRecordDao.getNoBackInfo();
     }
 }
